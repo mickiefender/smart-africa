@@ -1,13 +1,10 @@
-/** @type {import('next').NextConfig} */
+// next.config.mjs
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  images: {
-    unoptimized: true,
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.cache = false
+    }
+    return config
   },
 }
 

@@ -9,25 +9,25 @@ export default function SlidingBanner() {
   const banners = [
     {
       id: 1,
-      image: "images/image-slider1.jpg",
+      image: "/images/image-slider1.jpg",
       title: "Professional Business Cards",
       subtitle: "Make lasting impressions with premium digital cards",
     },
     {
       id: 2,
-      image: "images/image-slider2.jpg",
+      image: "/images/image-slider2.jpg",
       title: "Smart Networking Solutions",
       subtitle: "Connect instantly with NFC-enabled cards",
     },
     {
       id: 3,
-      image: "images/image-slider3.jpg",
+      image: "/images/image-slider3.jpg",
       title: "Modern Digital Identity",
       subtitle: "Stand out with customizable designs",
     },
     {
       id: 4,
-      image: "images/image-slider4.jpg",
+      image: "/images/image-slider4.jpg",
       title: "Seamless Contact Sharing",
       subtitle: "Share your details with a simple tap",
     },

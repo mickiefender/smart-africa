@@ -28,54 +28,103 @@ export function usePayment(): PaymentHookReturn {
     setError(null)
 
     try {
+      const amountInKobo = data.amount * 100
+
+      const requestBody = {
+        email: data.email,
+        amount: amountInKobo,
+        plan: data.plan,
+        quantity: data.quantity,
+        customerName: data.customerName,
+        customerPhone: data.customerPhone,
+        customerCompany: data.customerCompany,
+        timestamp: Date.now(), // Force fresh request
+      }
+
+      console.log("[v0] Initializing payment with data:", requestBody)
+
       const response = await fetch("/api/payment/initialize", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
         },
-        body: JSON.stringify({
-          email: data.email,
-          amount: data.amount * 100, // Convert to kobo
-          plan: data.plan,
-          quantity: data.quantity,
-          customerName: data.customerName,
-          customerPhone: data.customerPhone,
-          customerCompany: data.customerCompany,
-        }),
+        body: JSON.stringify(requestBody),
       })
 
       const result = await response.json()
+      console.log("[v0] Payment initialization result:", result)
 
-      if (result.success) {
-        if (window.PaystackPop) {
-          const handler = window.PaystackPop.setup({
-            key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY ?? "",
-            email: data.email,
-            amount: data.amount * 100,
-            currency: "GHS",
-            ref: result.reference,
-            callback: (response: any) => {
-              // Payment successful
-              console.log("[v0] Payment successful:", response)
-              window.location.href = `/payment/callback?reference=${response.reference}&status=success`
-            },
-            onClose: () => {
-              console.log("[v0] Payment popup closed")
-              setIsLoading(false)
-            },
-          })
-          handler.openIframe()
-        } else {
-          // Fallback to redirect if Paystack popup not available
-          window.location.href = result.data.authorization_url
-        }
-        return result.reference
-      } else {
+      if (!result.success) {
         setError(result.message || "Failed to initialize payment")
         return null
       }
+
+      const waitForPaystack = (): Promise<boolean> => {
+        return new Promise((resolve) => {
+          if (window.PaystackPop) {
+            resolve(true)
+            return
+          }
+
+          let attempts = 0
+          const maxAttempts = 30 // 3 seconds
+
+          const check = () => {
+            if (window.PaystackPop) {
+              resolve(true)
+              return
+            }
+
+            attempts++
+            if (attempts >= maxAttempts) {
+              resolve(false)
+              return
+            }
+
+            setTimeout(check, 100)
+          }
+
+          check()
+        })
+      }
+
+      const paystackReady = await waitForPaystack()
+      if (!paystackReady) {
+        setError("Payment system not ready. Please refresh and try again.")
+        return null
+      }
+
+      const { publicKey, reference } = result
+
+      if (!publicKey || !reference) {
+        setError("Payment configuration error. Please try again.")
+        return null
+      }
+
+      console.log("[v0] Setting up Paystack with reference:", reference)
+
+      const handler = window.PaystackPop.setup({
+        key: publicKey,
+        email: data.email,
+        amount: amountInKobo, // Already in kobo
+        currency: "GHS",
+        ref: reference,
+        callback: (response: any) => {
+          console.log("[v0] Payment callback received:", response)
+          window.location.href = `/payment/callback?reference=${response.reference}&status=success`
+        },
+        onClose: () => {
+          console.log("[v0] Payment modal closed")
+          setIsLoading(false)
+        },
+      })
+
+      handler.openIframe()
+
+      return reference
     } catch (err) {
-      console.error("[v0] Payment initialization error:", err)
+      console.error("[v0] Payment error:", err)
       setError("Failed to initialize payment. Please try again.")
       return null
     } finally {

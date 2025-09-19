@@ -48,9 +48,8 @@ export default function LoginPage() {
             Back to Home
           </Link>
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-teal-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">SA</span>
-            </div>
+            <img src="/images/smart-africa_logo.png" alt="SA" className="w-20 h-20 rounded-full object-contain" />
+
             <span className="text-2xl font-bold text-gray-900">Smart Africa</span>
           </div>
         </div>

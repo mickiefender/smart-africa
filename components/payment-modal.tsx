@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Loader2, CheckCircle, XCircle, Clock, X, Plus, Minus } from "lucide-react"
+import { Loader2, CheckCircle, Clock, X, Plus, Minus, AlertCircle } from "lucide-react"
 import { usePayment } from "@/hooks/use-payment"
 import { useRealtimePayment } from "@/hooks/use-realtime-payment"
 import { ReceiptModal } from "@/components/receipt-modal"
@@ -36,12 +36,24 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
   const [paymentReference, setPaymentReference] = useState<string | null>(null)
   const [showReceipt, setShowReceipt] = useState(false)
   const [receiptData, setReceiptData] = useState<any>(null)
+  const [formError, setFormError] = useState<string | null>(null)
 
   const { initializePayment, isLoading, error } = usePayment()
   const { paymentStatus, subscribeToPayment, unsubscribe } = useRealtimePayment()
   const { sendReceiptToWhatsApp } = useWhatsApp()
 
   const totalAmount = plan.priceValue * quantity
+
+  const validateForm = () => {
+    if (!customerData.name.trim()) return "Full name is required"
+    if (!customerData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerData.email)) {
+      return "Please enter a valid email address"
+    }
+    if (!customerData.phone.trim() || !/^[+]?[0-9\s\-]{10,}$/.test(customerData.phone)) {
+      return "Please enter a valid phone number"
+    }
+    return null
+  }
 
   const handleInputChange = (field: string, value: string) => {
     setCustomerData((prev) => ({ ...prev, [field]: value }))
@@ -53,9 +65,12 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
   }
 
   const handlePayment = async () => {
-    if (!customerData.name || !customerData.email || !customerData.phone) {
+    const validationError = validateForm()
+    if (validationError) {
+      setFormError(validationError)
       return
     }
+    setFormError(null)
 
     const paymentData = {
       email: customerData.email,
@@ -73,8 +88,8 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
         setPaymentReference(reference)
         subscribeToPayment(reference)
       }
-    } catch (error) {
-      console.error("Payment initialization failed:", error)
+    } catch (err) {
+      console.error("Payment initialization failed:", err)
     }
   }
 
@@ -83,7 +98,14 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
     setPaymentReference(null)
     setShowReceipt(false)
     setReceiptData(null)
+    setFormError(null)
     onClose()
+  }
+
+  const handleRetryPayment = () => {
+    setPaymentReference(null)
+    unsubscribe()
+    handlePayment()
   }
 
   const handleSendToWhatsApp = () => {
@@ -94,7 +116,6 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
 
   useEffect(() => {
     if (paymentStatus?.status === "success" && paymentReference) {
-      // Generate receipt data
       const receipt = {
         reference: paymentReference,
         planName: plan.name,
@@ -111,7 +132,6 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
       setReceiptData(receipt)
       setShowReceipt(true)
 
-      // Close Paystack modal and show receipt after short delay
       setTimeout(() => {
         setPaymentReference(null)
       }, 1000)
@@ -157,7 +177,13 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* Customer Information Form */}
+          {formError && (
+            <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200 flex items-start gap-2">
+              <AlertCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+              <span>{formError}</span>
+            </div>
+          )}
+
           {!paymentReference && (
             <div className="space-y-4">
               <h3 className="font-semibold text-lg">Customer Information</h3>
@@ -210,7 +236,6 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
             </div>
           )}
 
-          {/* Quantity Selector */}
           {!paymentReference && (
             <div className="space-y-2">
               <Label>Quantity</Label>
@@ -232,7 +257,6 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
             </div>
           )}
 
-          {/* Order Summary */}
           <div className="bg-gray-50 p-4 rounded-lg space-y-2">
             <h3 className="font-semibold">Order Summary</h3>
             <div className="flex justify-between">
@@ -253,31 +277,33 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
             </div>
           </div>
 
-          {/* Payment Status */}
           {paymentStatus && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-gray-50">
+            <div
+              className={`flex items-center gap-2 p-3 rounded-lg ${
+                paymentStatus.status === "failed" ? "bg-red-50 border border-red-200" : "bg-gray-50"
+              }`}
+            >
               {paymentStatus.status === "pending" && <Clock className="h-4 w-4 text-yellow-500" />}
               {paymentStatus.status === "processing" && <Loader2 className="h-4 w-4 animate-spin text-blue-500" />}
               {paymentStatus.status === "success" && <CheckCircle className="h-4 w-4 text-green-500" />}
-              {paymentStatus.status === "failed" && <XCircle className="h-4 w-4 text-red-500" />}
+              {paymentStatus.status === "failed" && <AlertCircle className="h-4 w-4 text-red-500" />}
               <span className="text-sm">{paymentStatus.message}</span>
             </div>
           )}
 
-          {/* Error Display */}
-          {error && <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200">{error}</div>}
+          {error && (
+            <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200 flex items-start gap-2">
+              <AlertCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
 
-          {/* Action Buttons */}
           <div className="flex gap-2">
             <Button variant="outline" onClick={handleClose} className="flex-1 bg-transparent">
               Cancel
             </Button>
             {!paymentReference && (
-              <Button
-                onClick={handlePayment}
-                disabled={isLoading || !customerData.name || !customerData.email || !customerData.phone}
-                className="flex-1 bg-orange-600 hover:bg-orange-700"
-              >
+              <Button onClick={handlePayment} disabled={isLoading} className="flex-1 bg-orange-600 hover:bg-orange-700">
                 {isLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -288,9 +314,24 @@ export function PaymentModal({ isOpen, onClose, plan, onPayment }: PaymentModalP
                 )}
               </Button>
             )}
+            {paymentReference && paymentStatus?.status === "failed" && (
+              <Button
+                onClick={handleRetryPayment}
+                disabled={isLoading}
+                className="flex-1 bg-orange-600 hover:bg-orange-700"
+              >
+                {isLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Retrying...
+                  </>
+                ) : (
+                  "Retry Payment"
+                )}
+              </Button>
+            )}
           </div>
 
-          {/* Payment Reference */}
           {paymentReference && <div className="text-xs text-gray-500 text-center">Reference: {paymentReference}</div>}
         </CardContent>
       </Card>

@@ -1,72 +1,114 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
-import { WebSocketClient, type PaymentUpdate } from "@/lib/websocket"
+
+interface PaymentStatus {
+  status: "pending" | "processing" | "success" | "failed"
+  message: string
+  reference?: string
+}
 
 interface RealtimePaymentHook {
-  paymentStatus: PaymentUpdate | null
-  isConnected: boolean
+  paymentStatus: PaymentStatus | null
   subscribeToPayment: (reference: string) => void
   unsubscribe: () => void
 }
 
 export function useRealtimePayment(): RealtimePaymentHook {
-  const [paymentStatus, setPaymentStatus] = useState<PaymentUpdate | null>(null)
-  const [isConnected, setIsConnected] = useState(false)
-  const [wsClient, setWsClient] = useState<WebSocketClient | null>(null)
+  const [paymentStatus, setPaymentStatus] = useState<PaymentStatus | null>(null)
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null)
 
-  const handleMessage = useCallback((data: PaymentUpdate) => {
-    console.log("[v0] Received payment update:", data)
-    setPaymentStatus(data)
-  }, [])
+  const subscribeToPayment = useCallback((reference: string) => {
+    setPaymentStatus({
+      status: "pending",
+      message: "Payment initiated, waiting for confirmation...",
+      reference,
+    })
 
-  const handleError = useCallback((error: Event) => {
-    console.error("[v0] WebSocket error:", error)
-    setIsConnected(false)
-  }, [])
+    let pollCount = 0
+    const maxPolls = 40 // 2 minutes max (40 * 3 seconds)
 
-  const subscribeToPayment = useCallback(
-    (reference: string) => {
-      if (typeof window !== "undefined") {
-        const wsUrl =
-          process.env.NODE_ENV === "development"
-            ? "ws://localhost:3001/payment-updates"
-            : "wss://your-websocket-server.com/payment-updates"
+    // Poll for payment status every 3 seconds
+    const id = setInterval(async () => {
+      try {
+        pollCount++
+        console.log(`[v0] Polling payment status for ${reference}, attempt ${pollCount}`)
 
-        const client = new WebSocketClient(wsUrl)
-        client.connect(handleMessage, handleError)
-
-        // Subscribe to specific payment reference
-        client.send({
-          type: "subscribe",
-          reference,
+        const response = await fetch("/api/payment/verify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ reference }),
         })
 
-        setWsClient(client)
-        setIsConnected(true)
+        const result = await response.json()
+        console.log(`[v0] Payment verification result:`, result)
+
+        if (result.success && result.data?.status === "success") {
+          setPaymentStatus({
+            status: "success",
+            message: "Payment successful!",
+            reference,
+          })
+          clearInterval(id)
+        } else if (!result.success || result.data?.status === "failed" || result.data?.status === "abandoned") {
+          setPaymentStatus({
+            status: "failed",
+            message: result.message || "Payment failed. Please try again.",
+            reference,
+          })
+          clearInterval(id)
+        } else if (pollCount >= maxPolls) {
+          setPaymentStatus({
+            status: "failed",
+            message: "Payment verification timeout. Please contact support if payment was deducted.",
+            reference,
+          })
+          clearInterval(id)
+        } else {
+          setPaymentStatus({
+            status: "processing",
+            message: `Processing payment... (${pollCount}/${maxPolls})`,
+            reference,
+          })
+        }
+      } catch (error) {
+        console.error("[v0] Payment status check error:", error)
+        pollCount++
+
+        if (pollCount >= maxPolls) {
+          setPaymentStatus({
+            status: "failed",
+            message: "Unable to verify payment status. Please contact support.",
+            reference,
+          })
+          clearInterval(id)
+        }
       }
-    },
-    [handleMessage, handleError],
-  )
+    }, 3000)
+
+    setIntervalId(id)
+  }, [])
 
   const unsubscribe = useCallback(() => {
-    if (wsClient) {
-      wsClient.disconnect()
-      setWsClient(null)
-      setIsConnected(false)
-      setPaymentStatus(null)
+    if (intervalId) {
+      clearInterval(intervalId)
+      setIntervalId(null)
     }
-  }, [wsClient])
+    setPaymentStatus(null)
+  }, [intervalId])
 
   useEffect(() => {
     return () => {
-      unsubscribe()
+      if (intervalId) {
+        clearInterval(intervalId)
+      }
     }
-  }, [unsubscribe])
+  }, [intervalId])
 
   return {
     paymentStatus,
-    isConnected,
     subscribeToPayment,
     unsubscribe,
   }

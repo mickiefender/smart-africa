@@ -204,7 +204,7 @@ export class ReceiptGenerator {
 
             <div class="total-section">
               <div class="total-amount">
-                Total Paid: ₦${data.amount.toLocaleString()}
+                Total Paid: ¢${data.amount.toLocaleString()}
               </div>
             </div>
           </div>
@@ -213,8 +213,8 @@ export class ReceiptGenerator {
             <p><strong>Thank you for choosing Smart Africa!</strong></p>
             <p>Your digital business cards will be processed within 24-48 hours.</p>
             <div class="contact-info">
-              <p>📧 orders@smartafrica.com | 📞 +234 123 456 7890</p>
-              <p>🏢 Lagos, Nigeria | 🌐 www.smartafrica.com</p>
+              <p>📧 orders@smartafrica.com | 📞 +233 208 517 482</p>
+              <p>🏢 Takoradi, Ghana| 🌐 www.smartafrica.com</p>
             </div>
           </div>
         </div>

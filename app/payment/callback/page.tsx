@@ -44,7 +44,7 @@ export default function PaymentCallback() {
           company: result.metadata?.company,
           cardType: result.metadata?.cardType || "Standard Digital",
           quantity: result.metadata?.quantity || "1",
-          planName: "Professional", // This should come from metadata
+          planName: result.metadata?.planName || "", // This should come from metadata
           amount: result.amount,
           paidAt: result.paidAt,
           transactionId: result.reference,
@@ -84,7 +84,7 @@ Please confirm receipt of this payment and let me know the next steps for my dig
 
 Thank you!`
 
-      const whatsappUrl = `https://wa.me/2341234567890?text=${encodeURIComponent(message)}`
+      const whatsappUrl = `https://wa.me/233208517482?text=${encodeURIComponent(message)}`
       window.open(whatsappUrl, "_blank")
     }
   }

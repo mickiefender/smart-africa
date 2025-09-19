@@ -25,19 +25,30 @@ export async function POST(request: NextRequest) {
     }
 
     if (!process.env.PAYSTACK_SECRET_KEY) {
-      console.log("[v0] Missing PAYSTACK_SECRET_KEY environment variable")
+      console.error("[v0] Missing PAYSTACK_SECRET_KEY environment variable")
       return NextResponse.json(
         {
           success: false,
-          message: "Payment service not configured properly",
+          message: "Payment service not configured. Missing secret key.",
         },
         { status: 500 },
       )
     }
 
-    // Generate unique reference
-    const reference = paystack.generateReference()
-    console.log("[v0] Generated reference:", reference)
+    if (!process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY) {
+      console.error("[v0] Missing NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY environment variable")
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Payment service not configured. Missing public key.",
+        },
+        { status: 500 },
+      )
+    }
+
+    let reference = paystack.generateReference()
+    let attempts = 0
+    const maxAttempts = 3
 
     // Prepare payment data
     const paymentData = {
@@ -45,7 +56,7 @@ export async function POST(request: NextRequest) {
       amount: amount, // Amount already in kobo from frontend
       currency: "GHS",
       reference,
-      callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/callback`,
+      callback_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/payment/callback`,
       metadata: {
         cardType: plan || "Digital Business Card",
         quantity: quantity.toString(),
@@ -57,28 +68,54 @@ export async function POST(request: NextRequest) {
 
     console.log("[v0] Payment data prepared:", paymentData)
 
-    // Initialize payment with Paystack
-    const response = await paystack.initializePayment(paymentData)
-    console.log("[v0] Paystack response:", response)
+    while (attempts < maxAttempts) {
+      try {
+        const response = await paystack.initializePayment(paymentData)
+        console.log("[v0] Paystack response:", response)
 
-    if (response.status) {
-      return NextResponse.json({
-        success: true,
-        data: response.data,
-        reference,
-      })
-    } else {
-      console.log("[v0] Paystack error:", response.message)
-      return NextResponse.json(
-        {
-          success: false,
-          message: response.message,
-        },
-        { status: 400 },
-      )
+        if (response.status) {
+          return NextResponse.json({
+            success: true,
+            data: response.data,
+            reference,
+            publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+          })
+        } else if (response.message?.includes("duplicate") || response.message?.includes("reference")) {
+          // Generate new reference and retry
+          reference = paystack.generateReference()
+          paymentData.reference = reference
+          attempts++
+          continue
+        } else {
+          console.log("[v0] Paystack error:", response.message)
+          return NextResponse.json(
+            {
+              success: false,
+              message: response.message || "Failed to initialize payment with Paystack",
+            },
+            { status: 400 },
+          )
+        }
+      } catch (error) {
+        attempts++
+        if (attempts >= maxAttempts) {
+          throw error
+        }
+        // Generate new reference for retry
+        reference = paystack.generateReference()
+        paymentData.reference = reference
+      }
     }
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to generate unique payment reference after multiple attempts",
+      },
+      { status: 500 },
+    )
   } catch (error) {
-    console.error("[v0] Payment initialization error:", error)
+    console.error("Payment initialization error:", error)
     return NextResponse.json(
       {
         success: false,

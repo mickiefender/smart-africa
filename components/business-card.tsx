@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import TikTokIcon from "./icons/tiktok-icon"// adjust path where you saved it
+
 import {
   Phone,
   Mail,
@@ -64,7 +66,7 @@ const socialIcons = {
   linkedin: Linkedin,
   youtube: Youtube,
   whatsapp: MessageCircle,
-  tiktok: Music,
+  tiktok: TikTokIcon,
 }
 
 const socialColors = {
@@ -301,9 +303,11 @@ END:VCARD`
           {/* Smart Africa Branding */}
           <div className="pt-4 border-t border-gray-100 text-center">
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-              <div className="w-4 h-4 bg-gradient-to-br from-orange-500 to-teal-600 rounded flex items-center justify-center">
-                <span className="text-white font-bold text-[8px]">SA</span>
-              </div>
+              <img 
+    src="/images/smart-africa_logo.png" 
+    alt="SA" 
+    className="w-24 h-18 rounded-full object-contain"
+  />
               <span>Powered by Smart Africa</span>
             </div>
           </div>

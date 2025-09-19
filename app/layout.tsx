@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   title: "Smart Africa - Digital Business Cards for African Professionals",
   description:
     "Create professional digital business cards with NFC technology. Perfect for modern African entrepreneurs and businesses. Fast delivery across Africa.",
-  keywords: "digital business cards, NFC cards, African business, networking, smart cards, professional cards",
+  keywords:
+    "digital business cards, NFC cards, African business, networking, smart cards, professional cards",
   authors: [{ name: "Smart Africa" }],
   creator: "Smart Africa",
   publisher: "Smart Africa",
@@ -20,7 +21,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   openGraph: {
     title: "Smart Africa - Digital Business Cards",
     description: "Professional digital business cards for African entrepreneurs",
@@ -54,6 +54,13 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+}
+
+// ✅ Move viewport out of metadata
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export default function RootLayout({

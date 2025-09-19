@@ -171,7 +171,7 @@ export default function ContactForm() {
                     </div>
                     <div className="min-w-0">
                       <p className="font-medium text-foreground text-sm sm:text-base">Email</p>
-                      <p className="text-muted-foreground text-sm sm:text-base break-all">orders@smartafrica.com</p>
+                      <p className="text-muted-foreground text-sm sm:text-base break-all"><a href="mailto:smartafrica99@gmail.com">smartafrica99@gmail.com</a></p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -180,7 +180,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">Phone</p>
-                      <p className="text-muted-foreground text-sm sm:text-base">+234 (0) 123 456 7890</p>
+                      <p className="text-muted-foreground text-sm sm:text-base"><a href="tel:+233208517482">+233 208 517 482</a><br /><a href="tel:+233206995489">+233 206 995 489</a></p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -189,7 +189,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">Location</p>
-                      <p className="text-muted-foreground text-sm sm:text-base">Lagos, Nigeria</p>
+                      <p className="text-muted-foreground text-sm sm:text-base">Takoradi, Ghana</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -198,7 +198,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">WhatsApp</p>
-                      <p className="text-muted-foreground text-sm sm:text-base">+234 123 456 7890</p>
+                      <p className="text-muted-foreground text-sm sm:text-base"><a href="https://wa.me/233206995489" target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp</a></p>
                     </div>
                   </div>
                 </div>
@@ -246,7 +246,7 @@ export default function ContactForm() {
                         id="name"
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
-                        placeholder="John Doe"
+                        placeholder="Michael Coleman"
                         required
                         className="text-sm"
                       />
@@ -260,7 +260,7 @@ export default function ContactForm() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
-                        placeholder="john@company.com"
+                        placeholder="smartafrica99@gmail.com"
                         required
                         className="text-sm"
                       />
@@ -276,7 +276,7 @@ export default function ContactForm() {
                         id="phone"
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
-                        placeholder="+234 123 456 7890"
+                        placeholder="+233 208 517 482"
                         className="text-sm"
                       />
                     </div>

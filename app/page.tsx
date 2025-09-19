@@ -5,9 +5,10 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Users, Globe, Smartphone, Star } from "lucide-react"
 import ContactForm from "@/components/contact-form"
 import PricingSection from "@/components/pricing-section"
-import {TestimonialsSection} from "@/components/testimonials-section"
+import { TestimonialsSection } from "@/components/testimonials-section"
 import { FloatingWhatsApp } from "@/components/floating-whatsapp"
 import SlidingBanner from "@/components/sliding-banner"
+import SlidingLogos from "@/components/sliding-logos"
 
 export default function HomePage() {
   return (
@@ -17,9 +18,11 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-teal-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SA</span>
-              </div>
+              <img
+                src="/images/smart-africa_logo.png"
+                alt="Smart Africa"
+                className="w-12 h-12 rounded-lg object-contain"
+              />
               <span className="text-lg sm:text-xl font-bold text-gray-900">Smart Africa</span>
             </div>
             {/* Mobile menu button */}
@@ -77,7 +80,7 @@ export default function HomePage() {
               <Link href="#contact" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-teal-600 hover:from-orange-600 hover:to-teal-700 text-white px-6 sm:px-8"
+                  className="w-full sm:w-auto !bg-gradient-to-r !from-orange-500 !to-teal-600 hover:!from-orange-600 hover:!to-teal-700 !text-white px-6 sm:px-8 border-0"
                 >
                   Order Your Cards
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -199,6 +202,9 @@ export default function HomePage() {
       {/* Sliding Banner */}
       <SlidingBanner />
 
+      {/* Sliding Logos Section */}
+      <SlidingLogos />
+
       {/* Pricing Section */}
       <PricingSection />
 
@@ -218,7 +224,7 @@ export default function HomePage() {
             Join thousands of professionals who have already made the switch to digital business cards.
           </p>
           <Link href="#contact">
-            <Button size="lg" variant="secondary" className="px-6 sm:px-8">
+            <Button size="lg" variant="secondary" className="px-6 sm:px-8 !bg-white !text-gray-900 hover:!bg-gray-100">
               Get Your Quote Today
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -232,9 +238,11 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-teal-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">SA</span>
-                </div>
+                <img
+                  src="/images/smart-africa_logo.png"
+                  alt="Smart Africa"
+                  className="w-8 h-8 rounded-lg object-contain"
+                />
                 <span className="text-lg sm:text-xl font-bold">Smart Africa</span>
               </div>
               <p className="text-gray-400 text-sm sm:text-base">
@@ -307,7 +315,7 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
-            <p className="text-sm">&copy; 2025 Smart Africa. All rights reserved.</p>
+            <p className="text-sm">&copy; 2024 Smart Africa. All rights reserved.</p>
           </div>
         </div>
       </footer>
