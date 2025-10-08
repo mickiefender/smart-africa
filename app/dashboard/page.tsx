@@ -134,9 +134,9 @@ export default function DashboardPage() {
       >
         <div className="p-6 border-b border-border flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">SA</span>
-            </div>
+           <div className="flex items-center justify-center space-x-2 mb-4">
+            <img src="/images/smart-africa_logo.png" alt="SA" className="w-20 h-20 rounded-full object-contain" />
+</div>
             <div>
               <h2 className="font-bold text-foreground">Smart Africa</h2>
               <p className="text-xs text-muted-foreground">Digital Cards</p>
