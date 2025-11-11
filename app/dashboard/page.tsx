@@ -303,7 +303,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="hidden md:block">
                   <img
-                    src="/images/card-back.png"
+                    src="/images/front.png"
                     alt="Welcome illustration"
                     className="h-32 lg:h-48 w-auto"
                   />

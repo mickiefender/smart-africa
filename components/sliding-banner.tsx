@@ -15,13 +15,13 @@ export default function SlidingBanner() {
     },
     {
       id: 2,
-      image: "/images/image-slider2.jpg",
+      image: "/images/lady with card.png",
       title: "Smart Networking Solutions",
       subtitle: "Connect instantly with NFC-enabled cards",
     },
     {
       id: 3,
-      image: "/images/image-slider3.jpg",
+      image: "/images/hand holding card.png",
       title: "Modern Digital Identity",
       subtitle: "Stand out with customizable designs",
     },
@@ -68,7 +68,7 @@ export default function SlidingBanner() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-teal-50 py-8 sm:py-12">
       <div className="container mx-auto px-4">
-        <div className="relative h-48 sm:h-64 md:h-80 rounded-2xl overflow-hidden shadow-xl">
+        <div className="relative h-58 sm:h-94 md:h-80 lg:h-150 rounded-2xl overflow-hidden shadow-xl">
           {/* Banner Container */}
           <div
             className="flex transition-transform duration-700 ease-in-out h-full"
