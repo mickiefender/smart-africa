@@ -9,7 +9,7 @@ export default function SlidingBanner() {
   const banners = [
     {
       id: 1,
-      image: "/images/image-slider1.jpg",
+      image: "/images/front.png",
       title: "Professional Business Cards",
       subtitle: "Make lasting impressions with premium digital cards",
     },
