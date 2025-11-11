@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 import { Suspense } from "react"
 import "./globals.css"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Smart Africa - Digital Business Cards for African Professionals",
@@ -56,6 +57,7 @@ export const metadata: Metadata = {
   },
 }
 
+
 // ✅ Move viewport out of metadata
 export const viewport: Viewport = {
   width: "device-width",
@@ -84,6 +86,7 @@ export default function RootLayout({
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
+         <SpeedInsights />
       </body>
     </html>
   )
