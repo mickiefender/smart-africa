@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import TikTokIcon from "./icons/tiktok-icon"// adjust path where you saved it
+import TikTokIcon from "./icons/tiktok-icon"
 
 import {
   Phone,
@@ -18,7 +18,6 @@ import {
   Linkedin,
   Youtube,
   MessageCircle,
-  Music,
   ExternalLink,
 } from "lucide-react"
 
@@ -67,6 +66,7 @@ const socialIcons = {
   youtube: Youtube,
   whatsapp: MessageCircle,
   tiktok: TikTokIcon,
+  gmail: Mail,
 }
 
 const socialColors = {
@@ -78,6 +78,22 @@ const socialColors = {
   youtube: "bg-red-600 hover:bg-red-700",
   whatsapp: "bg-green-500 hover:bg-green-600",
   tiktok: "bg-black hover:bg-gray-800",
+  gmail: "bg-red-500 hover:bg-red-600",
+}
+
+const getWhatsAppUrl = (url: string): string => {
+  // If it's already a full WhatsApp URL, return as is
+  if (url.includes("wa.me") || url.includes("whatsapp.com")) {
+    return url
+  }
+
+  // Extract phone number: keep digits and + prefix for international format
+  const phoneNumber = url.replace(/[^\d+]/g, "")
+
+  // Ensure phone number starts with + for international format
+  const formattedPhone = phoneNumber.startsWith("+") ? phoneNumber : `+${phoneNumber}`
+
+  return `https://wa.me/${formattedPhone}`
 }
 
 export function BusinessCard({ profile, socialLinks, websiteLinks }: BusinessCardProps) {
@@ -119,7 +135,6 @@ END:VCARD`
         console.log("Error sharing:", error)
       }
     } else {
-      // Fallback: copy to clipboard
       try {
         await navigator.clipboard.writeText(window.location.href)
         alert("Link copied to clipboard!")
@@ -227,24 +242,35 @@ END:VCARD`
           {/* Social Media Links */}
           {socialLinks && socialLinks.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Connect with me</h3>
-              <div className="flex flex-wrap gap-3">
+              <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <div className="w-1 h-4 bg-gradient-to-b from-orange-500 to-teal-500 rounded-full"></div>
+                Connect with me
+              </h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {socialLinks.map((social) => {
-                  const IconComponent = socialIcons[social.platform.toLowerCase() as keyof typeof socialIcons]
-                  const colorClass = socialColors[social.platform.toLowerCase() as keyof typeof socialColors]
+                  const platform = social.platform.toLowerCase()
+                  const IconComponent = socialIcons[platform as keyof typeof socialIcons]
+                  const colorClass = socialColors[platform as keyof typeof socialColors]
+
+                  const displayUrl = platform === "whatsapp" ? getWhatsAppUrl(social.url) : social.url
+                  const displayUsername =
+                    platform === "whatsapp" && !social.url.includes("wa.me") ? social.url : social.username
 
                   if (!IconComponent) return null
 
                   return (
                     <a
                       key={social.id}
-                      href={social.url}
+                      href={displayUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 rounded-full text-white transition-all duration-200 transform hover:scale-110 shadow-lg ${colorClass}`}
-                      title={`Follow on ${social.platform}`}
+                      className={`flex flex-col items-center gap-2 p-3 rounded-xl text-white transition-all duration-200 transform hover:scale-105 shadow-lg ${colorClass}`}
+                      title={`Connect on ${social.platform}`}
                     >
-                      <IconComponent className="h-5 w-5" />
+                      <IconComponent className="h-6 w-6" />
+                      <span className="text-xs font-semibold capitalize text-center leading-tight">
+                        {platform === "x" ? "X" : platform}
+                      </span>
                     </a>
                   )
                 })}
@@ -303,11 +329,7 @@ END:VCARD`
           {/* Smart Africa Branding */}
           <div className="pt-4 border-t border-gray-100 text-center">
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-              <img 
-    src="/images/smart-africa_logo.png" 
-    alt="SA" 
-    className="w-24 h-18 rounded-full object-contain"
-  />
+              <img src="/images/smart-africa_logo.png" alt="SA" className="w-24 h-18 rounded-full object-contain" />
               <span>Powered by Smart Africa</span>
             </div>
           </div>

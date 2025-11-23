@@ -49,7 +49,7 @@ export default async function CardPage({ params }: PageProps) {
     .order("created_at", { ascending: true })
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gray-50">
       <NavigationBlocker />
 
       {/* Main Content */}
