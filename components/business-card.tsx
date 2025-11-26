@@ -215,12 +215,17 @@ END:VCARD`
             )}
 
             {profile.location && (
-              <div className="flex items-center gap-3 text-gray-700 p-2 -m-2">
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(profile.location)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 text-gray-700 hover:text-orange-600 transition-colors p-2 -m-2 rounded-lg hover:bg-orange-50"
+              >
                 <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
                   <MapPin className="h-4 w-4 text-orange-600" />
                 </div>
                 <span className="text-sm font-medium">{profile.location}</span>
-              </div>
+              </a>
             )}
 
             {profile.website && (
