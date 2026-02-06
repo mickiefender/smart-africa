@@ -9,24 +9,24 @@ import "./globals.css"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
-  title: "Smart Africa - Digital Business Cards for African Professionals",
+  title: "Vertex Blueprint Technology- Digital Business Cards for African Professionals",
   description:
     "Create professional digital business cards with NFC technology. Perfect for modern African entrepreneurs and businesses. Fast delivery across Africa.",
   keywords:
     "digital business cards, NFC cards, African business, networking, smart cards, professional cards",
-  authors: [{ name: "Smart Africa" }],
-  creator: "Smart Africa",
-  publisher: "Smart Africa",
+  authors: [{ name: "Vertex Blueprint Technology" }],
+  creator: "Vertex Blueprint Technology",
+  publisher: "Vertex Blueprint Technology",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: "Smart Africa - Digital Business Cards",
+    title: "Vertex Blueprint Technology- Digital Business Cards",
     description: "Professional digital business cards for African entrepreneurs",
-    url: "https://smartafrica.com",
-    siteName: "Smart Africa",
+    url: "https://vertex-blueprint-technology.com",
+    siteName: "Vertex Blueprint Technology",
     images: [
       {
         url: "/og-image.jpg",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Smart Africa - Digital Business Cards",
+    title: "Vertex Blueprint Technology - Digital Business Cards",
     description: "Professional digital business cards for African entrepreneurs",
     images: ["/og-image.jpg"],
   },
@@ -74,7 +74,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <Script src="https://js.paystack.co/v1/inline.js" strategy="beforeInteractive" />
-        <meta name="theme-color" content="#ea580c" />
+        <meta name="theme-color" content="#b38e7a" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Smart Africa" />

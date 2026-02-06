@@ -18,7 +18,7 @@ export default function PricingSection() {
       id: "starter",
       name: "Starter",
       price: "¢200",
-      priceValue: 200,
+      priceValue: 1000,
       period: "per card",
       description: "Perfect for individuals and small businesses",
       icon: <Zap className="h-6 w-6" />,
