@@ -334,8 +334,8 @@ END:VCARD`
           {/* Smart Africa Branding */}
           <div className="pt-4 border-t border-gray-100 text-center">
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-              <img src="/images/smart-africa_logo.png" alt="SA" className="w-24 h-18 rounded-full object-contain" />
-              <span>Powered by Smart Africa</span>
+              <img src="/images/Vertex-logo.png" alt="SA" className="w-24 h-18 rounded-full object-contain" />
+              <span>Powered by Vertex Blueprint Technologies</span>
             </div>
           </div>
         </CardContent>
