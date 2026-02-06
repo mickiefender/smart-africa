@@ -36,6 +36,7 @@ interface Profile {
   job_title?: string
   company?: string
   created_at: string
+  profile_image_url?: string
 }
 
 interface Analytics {
@@ -168,7 +169,7 @@ export default function DashboardPage() {
 
       const { data: profileData } = await supabase
         .from("profiles")
-        .select("user_id, full_name, job_title, company, created_at")
+        .select("user_id, full_name, job_title, company, created_at, profile_image_url")
         .eq("id", user.id)
         .single()
 
@@ -266,10 +267,10 @@ export default function DashboardPage() {
         <div className="p-6 border-b border-border flex items-center justify-between">
           <div className="flex items-center space-x-3">
            <div className="flex items-center justify-center space-x-2 mb-4">
-            <img src="/images/smart-africa_logo.png" alt="SA" className="w-20 h-20 rounded-full object-contain" />
+            <img src="/images/Vertex-logo.png" alt="SA" className="w-20 h-20 rounded-full object-contain" />
 </div>
             <div>
-              <h2 className="font-bold text-foreground">Smart Africa</h2>
+              <h2 className="font-bold text-foreground">Vertex cards</h2>
               <p className="text-xs text-muted-foreground">Digital Cards</p>
             </div>
           </div>
@@ -402,14 +403,22 @@ export default function DashboardPage() {
                 <Bell className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
               </button>
               <div className="flex items-center space-x-2 sm:space-x-3 pl-2 sm:pl-4 border-l border-border">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-purple-200 flex items-center justify-center">
-                  <span className="text-purple-700 font-semibold text-xs sm:text-sm">
-                    {profile?.full_name
-                      ?.split(" ")
-                      .map((n) => n[0])
-                      .join("")
-                      .toUpperCase() || "U"}
-                  </span>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-purple-200 flex items-center justify-center overflow-hidden">
+                  {profile?.profile_image_url ? (
+                    <img
+                      src={profile.profile_image_url}
+                      alt={profile.full_name || "Profile"}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-purple-700 font-semibold text-xs sm:text-sm">
+                      {profile?.full_name
+                        ?.split(" ")
+                        .map((n) => n[0])
+                        .join("")
+                        .toUpperCase() || "U"}
+                    </span>
+                  )}
                 </div>
                 <div className="text-sm hidden md:block">
                   <p className="font-semibold text-foreground">{profile?.full_name || "User"}</p>
@@ -435,7 +444,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="hidden md:block">
                     <img
-                      src="/images/front.png"
+                      src="/images/back.png"
                       alt="Welcome illustration"
                       className="h-32 lg:h-48 w-auto"
                     />
@@ -473,8 +482,16 @@ export default function DashboardPage() {
                   <CardContent className="p-4 sm:p-6">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                       <div className="flex items-center space-x-3 sm:space-x-4 w-full sm:w-auto">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center flex-shrink-0">
-                          <UserCircle className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center flex-shrink-0 overflow-hidden">
+                          {profile.profile_image_url ? (
+                            <img
+                              src={profile.profile_image_url}
+                              alt={profile.full_name}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <UserCircle className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+                          )}
                         </div>
                         <div className="space-y-1 min-w-0 flex-1">
                           <h3 className="text-base sm:text-lg font-semibold text-purple-700 truncate">

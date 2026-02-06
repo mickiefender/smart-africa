@@ -21,7 +21,7 @@ export default function LoadingSpinner({ message = "Loading..." }: LoadingSpinne
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="text-center space-y-6">
         <div className="relative">
-          <img src="/images/smart-africa_logo.png" alt="Smart Africa" className="w-24 h-24 mx-auto animate-pulse" />
+          <img src="/images/Vertex-logo.png" alt="Smart Africa" className="w-24 h-24 mx-auto animate-pulse" />
           <div className="absolute inset-0 bg-primary/10 rounded-full animate-ping"></div>
         </div>
         <div className="space-y-2">
