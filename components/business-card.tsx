@@ -100,7 +100,8 @@ export function BusinessCard({ profile, socialLinks, websiteLinks }: BusinessCar
   const [imageError, setImageError] = useState(false)
 
   const handleDownloadVCard = () => {
-    const vCardData = `BEGIN:VCARD
+    // Basic vCard data
+    let vCardData = `BEGIN:VCARD
 VERSION:3.0
 FN:${profile.full_name}
 ORG:${profile.company}
@@ -109,8 +110,15 @@ EMAIL:${profile.email}
 TEL:${profile.phone}
 URL:${profile.website}
 ADR:;;${profile.location};;;;
-NOTE:${profile.bio}
-END:VCARD`
+NOTE:${profile.bio}\n`
+
+    // Add N property for better name parsing in contact apps
+    const nameParts = profile.full_name.split(" ")
+    const firstName = nameParts.shift() || ""
+    const lastName = nameParts.join(" ")
+    vCardData += `N:${lastName};${firstName};;;\n`
+
+    vCardData += `END:VCARD`
 
     const blob = new Blob([vCardData], { type: "text/vcard" })
     const url = window.URL.createObjectURL(blob)
