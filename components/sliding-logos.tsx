@@ -34,8 +34,8 @@ export default function SlidingLogos() {
     return null
   }
 
-  // Duplicate the logos array to create seamless loop
-  const duplicatedLogos = [...partnerLogos, ...partnerLogos]
+  // Duplicate the logos array multiple times to create seamless loop and ensure enough content for mobile/desktop
+  const duplicatedLogos = [...partnerLogos, ...partnerLogos, ...partnerLogos, ...partnerLogos]
 
   return (
     <section className="py-12 sm:py-16 bg-gray-20 overflow-hidden">
@@ -47,7 +47,7 @@ export default function SlidingLogos() {
       </div>
 
       <div className="relative">
-        <div className="flex animate-slide-left">
+        <div className="flex animate-slide-left" style={{ animationDuration: "20s" }}>
           {duplicatedLogos.map((partner, index) => (
             <div
               key={`${partner.name}-${index}`}
@@ -57,7 +57,7 @@ export default function SlidingLogos() {
               <img
                 src={partner.logo || "/placeholder.svg"}
                 alt={partner.name}
-                className="h-16 sm:h-20 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="h-24 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
                 loading="lazy"
               />
             </div>

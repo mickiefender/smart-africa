@@ -9,12 +9,30 @@ import "./globals.css"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
-  title: "Vertex Blueprint Technology- Digital Business Cards for African Professionals",
+  metadataBase: new URL("https://vertexcards.tech"),
+  title: {
+    default: "Vertex Blueprint Technology - Digital Business Cards for African Professionals",
+    template: "%s | Vertex Blueprint Technology",
+  },
   description:
     "Create professional digital business cards with NFC technology. Perfect for modern African entrepreneurs and businesses. Fast delivery across Africa.",
-  keywords:
-    "digital business cards, NFC cards, African business, networking, smart cards, professional cards",
-  authors: [{ name: "Vertex Blueprint Technology" }],
+  applicationName: "Vertex Blueprint Technology",
+  authors: [{ name: "Vertex Blueprint Technology", url: "https://vertexcards.tech" }],
+  generator: "Next.js",
+  keywords: [
+    "digital business cards",
+    "NFC cards",
+    "African business",
+    "networking",
+    "smart cards",
+    "professional cards",
+    "Vertex Blueprint Technology",
+    "contactless business cards",
+    "sustainable networking",
+    "Ghana business cards",
+    "Complementary cards",
+    "personalized cards",
+  ],
   creator: "Vertex Blueprint Technology",
   publisher: "Vertex Blueprint Technology",
   formatDetection: {
@@ -22,17 +40,20 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Vertex Blueprint Technology- Digital Business Cards",
-    description: "Professional digital business cards for African entrepreneurs",
-    url: "https://vertex-blueprint-technology.com",
+    title: "Vertex Blueprint Technology - Digital Business Cards",
+    description: "Professional digital business cards for African entrepreneurs. Share contact info instantly with NFC technology.",
+    url: "https://vertexcards.tech",
     siteName: "Vertex Blueprint Technology",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/Untitled design (37).png",
         width: 1200,
         height: 630,
-        alt: "Smart Africa Digital Business Cards",
+        alt: "Vertex Blueprint Technology Digital Business Cards",
       },
     ],
     locale: "en_US",
@@ -41,8 +62,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Vertex Blueprint Technology - Digital Business Cards",
-    description: "Professional digital business cards for African entrepreneurs",
-    images: ["/og-image.jpg"],
+    description: "Professional digital business cards for African entrepreneurs. Tap to share.",
+    images: ["/images/Untitled design (37).png"],
+    creator: "@vertexblueprint",
   },
   robots: {
     index: true,
@@ -55,14 +77,32 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "/images/Untitled design (37).png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "/images/Untitled design (37).png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Smart Africa",
+  },
+  verification: {
+    google: "google-site-verification-code",
+  },
+  category: "technology",
 }
 
-
-// ✅ Move viewport out of metadata
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  themeColor: "#b38e7a",
 }
 
 export default function RootLayout({
@@ -74,14 +114,6 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <Script src="https://js.paystack.co/v1/inline.js" strategy="beforeInteractive" />
-        <meta name="theme-color" content="#b38e7a" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Smart Africa" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>

@@ -65,10 +65,12 @@ export default function HomePage() {
           loop
           playsInline
           preload="auto"
+          disablePictureInPicture
           poster="/images/back.png"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          {/* The local file appears to be a text transcript. Using a remote video to verify code functionality. */}
+          {/* Optional: Add a mobile-optimized video source here with media="(max-width: 768px)" */}
+          {/* <source src="/videos/card-video-mobile.mp4" type="video/mp4" media="(max-width: 768px)" /> */}
           <source src="/videos/card-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
