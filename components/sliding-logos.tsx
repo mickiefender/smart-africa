@@ -47,17 +47,17 @@ export default function SlidingLogos() {
       </div>
 
       <div className="relative">
-        <div className="flex animate-slide-left" style={{ animationDuration: "20s" }}>
+        <div className="flex animate-slide-left" style={{ animationDuration: "10s" }}>
           {duplicatedLogos.map((partner, index) => (
             <div
               key={`${partner.name}-${index}`}
               className="flex-shrink-0 mx-4 sm:mx-8 flex items-center justify-center"
-              style={{ minWidth: "150px" }}
+              style={{ minWidth: "200px" }}
             >
               <img
                 src={partner.logo || "/placeholder.svg"}
                 alt={partner.name}
-                className="h-24 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="h-32 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
                 loading="lazy"
               />
             </div>
