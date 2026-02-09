@@ -19,11 +19,11 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <img
-                src="/images/smart-africa_logo.png"
-                alt="Smart Africa"
+                src="/images/Vertex-logo.png"
+                alt="Vertex cards logo"
                 className="w-12 h-12 rounded-lg object-contain"
               />
-              <span className="text-lg sm:text-xl font-bold text-gray-900">Smart Africa</span>
+              <span className="text-lg sm:text-xl font-bold text-green-600">Vertex Cards</span>
             </div>
             {/* Mobile menu button */}
             <div className="md:hidden">
@@ -56,21 +56,40 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-12 sm:py-16 lg:py-20 px-4">
-        <div className="container mx-auto text-center">
+      {/* Hero Section with Video Background */}
+      <section className="relative w-full h-screen min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/back.png"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          {/* The local file appears to be a text transcript. Using a remote video to verify code functionality. */}
+          <source src="/videos/card-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40"></div>
+
+        {/* Content */}
+        <div className="container mx-auto text-center relative z-10 px-4">
           <div className="max-w-4xl mx-auto">
             <Badge className="mb-4 sm:mb-6 bg-orange-100 text-orange-800 hover:bg-orange-200">
               Digital Business Cards for Africa
             </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 text-balance">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-balance">
               Create Your
-              <span className="bg-gradient-to-r from-orange-500 to-teal-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-300 to-teal-300 bg-clip-text text-transparent">
                 {" "}
                 Digital Business Card
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 text-pretty max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8 text-pretty max-w-2xl mx-auto px-4 sm:px-0">
               Connect, share, and grow your network with beautiful, professional digital business cards. Perfect for the
               modern African entrepreneur.
             </p>
@@ -87,14 +106,14 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="#pricing" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 bg-transparent">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 bg-white/20 text-white hover:bg-white/30 border-white/30">
                   View Pricing
                 </Button>
               </Link>
             </div>
 
             {/* Profile Images Grid */}
-            <div className="flex justify-center items-center space-x-2 sm:space-x-4 mb-6 sm:mb-8">
+            <div className="flex justify-center items-center space-x-2 sm:space-x-4">
               <div className="relative">
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 p-1">
                   <div className="w-full h-full rounded-full bg-orange-500 flex items-center justify-center">
@@ -239,11 +258,11 @@ export default function HomePage() {
             <div className="col-span-2 md:col-span-1">
               <div className="flex items-center space-x-2 mb-4">
                 <img
-                  src="/images/smart-africa_logo.png"
-                  alt="Smart Africa"
+                  src="/images/Untitled design (37).png"
+                  alt="Vertex Blueprint Technologies"
                   className="w-8 h-8 rounded-lg object-contain"
                 />
-                <span className="text-lg sm:text-xl font-bold">Smart Africa</span>
+                <span className="text-lg sm:text-xl font-bold">Vertex Blueprint Technologies</span>
               </div>
               <p className="text-gray-400 text-sm sm:text-base">
                 Empowering African professionals with digital business solutions.
@@ -315,7 +334,7 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-400">
-            <p className="text-sm">&copy; 2024 Smart Africa. All rights reserved.</p>
+            <p className="text-sm">&copy; 2026 Vertex Blueprint Technologies. All rights reserved.</p>
           </div>
         </div>
       </footer>

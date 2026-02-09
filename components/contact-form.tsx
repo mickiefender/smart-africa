@@ -19,9 +19,9 @@ export default function ContactForm() {
   const [showPaymentModal, setShowPaymentModal] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState({
     id: "professional",
-    name: "Professional",
-    price: "¢300",
-    priceValue: 300,
+    name: "PRO",
+    price: "¢1000",
+    priceValue: 1000,
     description: "Best for growing businesses and professionals",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -171,7 +171,7 @@ export default function ContactForm() {
                     </div>
                     <div className="min-w-0">
                       <p className="font-medium text-foreground text-sm sm:text-base">Email</p>
-                      <p className="text-muted-foreground text-sm sm:text-base break-all"><a href="mailto:smartafrica99@gmail.com">smartafrica99@gmail.com</a></p>
+                      <p className="text-muted-foreground text-sm sm:text-base break-all"><a href="mailto:vertexblueprinttech@gmail.com">vertexblueprinttech@gmail.com</a></p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -180,7 +180,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">Phone</p>
-                      <p className="text-muted-foreground text-sm sm:text-base"><a href="tel:+233208517482">+233 208 517 482</a><br /><a href="tel:+233206995489">+233 206 995 489</a></p>
+                      <p className="text-muted-foreground text-sm sm:text-base"><a href="tel:+233208517482">+233 208 517 482</a><br /><a href="tel:+233200609004">+233 200 609 004</a></p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -189,7 +189,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">Location</p>
-                      <p className="text-muted-foreground text-sm sm:text-base">Takoradi, Ghana</p>
+                      <p className="text-muted-foreground text-sm sm:text-base">Accra, Ghana</p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">

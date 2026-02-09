@@ -16,19 +16,20 @@ export default function PricingSection() {
   const plans = [
     {
       id: "starter",
-      name: "Starter",
-      price: "¢200",
-      priceValue: 1000,
+      name: "BASIC",
+      price: "¢500",
+      priceValue: 500,
       period: "per card",
-      description: "Perfect for individuals and small businesses",
+      description: "Best for students and freelancers",
       icon: <Zap className="h-6 w-6" />,
       features: [
-        "Digital business card",
-        "QR code sharing",
-        "Contact info management",
-        "Basic analytics",
-        "Mobile optimized",
-        "Email support",
+        "1 smart card",
+        "Customer name + Logo printed on card",
+        "Digital profile page",
+        "Contact Info(phone, email, social)",
+        "Profile photo",
+        "Qr code backup",
+        "Social media links"
       ],
       popular: false,
       buttonText: "Get Started",
@@ -36,20 +37,19 @@ export default function PricingSection() {
     },
     {
       id: "professional",
-      name: "Professional",
-      price: "¢250",
-      priceValue: 250,
+      name: "PRO",
+      price: "¢1,000",
+      priceValue: 1000,
       period: "per card",
-      description: "Best for growing businesses and professionals",
+      description: "Best for professionals and enterpreneurs",
       icon: <Star className="h-6 w-6" />,
       features: [
-        "Everything in Starter",
-        "NFC-enabled physical card",
-        "Custom branding & colors",
-        "Social media integration",
-        "Advanced analytics",
-        "Lead capture forms",
-        "Priority support",
+        "Everything in basic",
+        "Google map location",
+        "Whatsapp direct chat button",
+        "Admin access to edit profile",
+        "Cusatom design and colours for card",
+      
       ],
       popular: true,
       buttonText: "Most Popular",
@@ -57,20 +57,18 @@ export default function PricingSection() {
     },
     {
       id: "enterprise",
-      name: "Enterprise",
-      price: "¢400",
-      priceValue: 400,
-      period: "per card",
-      description: "For large teams and corporations",
+      name: "PREMIUM + WEBSITE",
+      price: "¢2,500",
+      priceValue: 2500,
+      period: "per card + website",
+      description: "Best for CEOs and businesses looking to establish a strong online presence",
       icon: <Crown className="h-6 w-6" />,
       features: [
-        "Everything in Professional",
-        "Team management dashboard",
-        "Bulk ordering discounts",
-        "Custom integrations",
-        "White-label options",
-        "Dedicated account manager",
-        "24/7 phone support",
+        "Landing page website (3-5 pages)",
+        "Custom domain name(e.g. yourname.com)",
+        "Analytics dashboard to track card interactions",
+        "Priority support",
+       
       ],
       popular: false,
       buttonText: "Contact Sales",
@@ -199,7 +197,7 @@ export default function PricingSection() {
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 text-sm text-muted-foreground">
               <span className="flex items-center justify-center space-x-1">
                 <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                <span>30-day money-back guarantee</span>
+                <span>5-day money-back guarantee</span>
               </span>
               <span className="flex items-center justify-center space-x-1">
                 <Check className="h-4 w-4 text-primary flex-shrink-0" />

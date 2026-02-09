@@ -17,8 +17,8 @@ const partnerLogos = [
   },
 
   {
-    name: "Snaptic",
-    logo: "/images/logos/snaptic-logo.png",
+    name: "Vertex Blueprint Technologies",
+    logo: "/images/Untitled design (37).png",
   },
  
 ]
