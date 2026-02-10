@@ -72,7 +72,7 @@ export function TestimonialsSection() {
             Trusted by Professionals Across Africa
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See how Smart Africa's digital business cards are helping entrepreneurs and businesses make lasting
+            See how Vertex Card's digital business cards are helping entrepreneurs and businesses make lasting
             connections across the continent.
           </p>
         </div>

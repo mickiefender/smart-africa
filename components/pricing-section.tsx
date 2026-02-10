@@ -199,7 +199,7 @@ export default function PricingSection() {
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 text-sm text-muted-foreground">
               <span className="flex items-center justify-center space-x-1">
                 <Check className="h-4 w-4 text-emerald-500 flex-shrink-0" />
-                <span>30-day money-back guarantee</span>
+                <span>5-day money-back guarantee</span>
               </span>
               <span className="flex items-center justify-center space-x-1">
                 <Check className="h-4 w-4 text-emerald-500 flex-shrink-0" />

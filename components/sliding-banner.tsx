@@ -15,8 +15,8 @@ export default function SlidingBanner() {
     {
       id: 2,
       image: "/images/lady with card.png",
-      title: "Smart Networking Solutions",
-      subtitle: "Connect instantly with NFC-enabled cards",
+      title: "",
+      subtitle: "",
     },
     {
       id: 3,
@@ -27,8 +27,14 @@ export default function SlidingBanner() {
     {
       id: 4,
       image: "/images/image-slider4.jpg",
-      title: "Seamless Contact Sharing",
-      subtitle: "Share your details with a simple tap",
+      title: "",
+      subtitle: "",
+    },
+    {
+      id: 5,
+      image: "/images/Conference2.png",
+      title: "",
+      subtitle: "",
     },
   ]
 
@@ -80,7 +86,7 @@ export default function SlidingBanner() {
               >
                 <Image
                   src={banner.image || "/placeholder.svg"}
-                  alt={banner.title}
+                  alt={banner.title || "Banner image"}
                   fill
                   className="object-cover mix-blend-overlay"
                   priority={index === 0}
