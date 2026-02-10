@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
       {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -57,7 +57,7 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section with Video Background */}
-      <section className="relative w-full h-screen min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative w-full h-[50vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
         {/* Video Background */}
         <video
           autoPlay
@@ -78,20 +78,25 @@ export default function HomePage() {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40"></div>
 
-        {/* Content */}
-        <div className="container mx-auto text-center relative z-10 px-4">
+        {/* Bottom Gradient Blend */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-orange-50 to-transparent z-10 pointer-events-none"></div>
+      </section>
+
+      {/* Hero Content */}
+      <section className="relative -mt-24 py-12 sm:py-16 px-4">
+        <div className="container mx-auto text-center">
           <div className="max-w-4xl mx-auto">
             <Badge className="mb-4 sm:mb-6 bg-orange-100 text-orange-800 hover:bg-orange-200">
               Digital Business Cards for Africa
             </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 text-balance">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 sm:mb-6 text-balance">
               Create Your
-              <span className="bg-gradient-to-r from-orange-300 to-teal-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-500 to-teal-600 bg-clip-text text-transparent">
                 {" "}
                 Digital Business Card
               </span>
             </h1>
-            <p className="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8 text-pretty max-w-2xl mx-auto px-4 sm:px-0">
+            <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 text-pretty max-w-2xl mx-auto px-4 sm:px-0">
               Connect, share, and grow your network with beautiful, professional digital business cards. Perfect for the
               modern African entrepreneur.
             </p>
@@ -108,7 +113,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="#pricing" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 bg-white/20 text-white hover:bg-white/30 border-white/30">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto px-6 sm:px-8 border-gray-200 text-gray-900 hover:bg-gray-100">
                   View Pricing
                 </Button>
               </Link>
@@ -172,7 +177,7 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Everything you need for digital networking
+              Why Choose Vertex Cards?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4 sm:px-0">
               Our platform provides all the tools you need to create, share, and manage your professional digital
@@ -181,10 +186,10 @@ export default function HomePage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <Card className="p-4 sm:p-6 hover:shadow-lg transition-shadow">
+            <Card className="p-4 sm:p-6 border-2 border-emerald-500 bg-gradient-to-br from-white to-emerald-50 shadow-xl transition-all">
               <CardContent className="p-0">
-                <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-orange-600" />
+                <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mb-4">
+                  <Users className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-2">Easy Profile Creation</h3>
                 <p className="text-gray-600 text-sm sm:text-base">
@@ -193,10 +198,10 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="p-4 sm:p-6 hover:shadow-lg transition-shadow">
+            <Card className="p-4 sm:p-6 border-2 border-emerald-500 bg-gradient-to-br from-white to-emerald-50 shadow-xl transition-all">
               <CardContent className="p-0">
-                <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                  <Globe className="h-6 w-6 text-teal-600" />
+                <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mb-4">
+                  <Globe className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-2">Global Reach</h3>
                 <p className="text-gray-600 text-sm sm:text-base">
@@ -205,10 +210,10 @@ export default function HomePage() {
               </CardContent>
             </Card>
 
-            <Card className="p-4 sm:p-6 hover:shadow-lg transition-shadow sm:col-span-2 lg:col-span-1">
+            <Card className="p-4 sm:p-6 border-2 border-emerald-500 bg-gradient-to-br from-white to-emerald-50 shadow-xl transition-all sm:col-span-2 lg:col-span-1">
               <CardContent className="p-0">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Smartphone className="h-6 w-6 text-purple-600" />
+                <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mb-4">
+                  <Smartphone className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-lg sm:text-xl font-semibold mb-2">Mobile Optimized</h3>
                 <p className="text-gray-600 text-sm sm:text-base">
@@ -238,10 +243,10 @@ export default function HomePage() {
       <ContactForm />
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-orange-500 to-teal-600">
+      <section className="py-16 sm:py-20 bg-gradient-to-r from-emerald-600 to-yellow-500">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ready to go digital?</h2>
-          <p className="text-lg sm:text-xl text-orange-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-4 sm:px-0">
+          <p className="text-lg sm:text-xl text-emerald-50 mb-6 sm:mb-8 max-w-2xl mx-auto px-4 sm:px-0">
             Join thousands of professionals who have already made the switch to digital business cards.
           </p>
           <Link href="#contact">

@@ -9,9 +9,8 @@ export default function SlidingBanner() {
   const banners = [
     {
       id: 1,
-      image: "/images/front.png",
-      title: "Professional Business Cards",
-      subtitle: "Make lasting impressions with premium digital cards",
+      image: "/images/Conference-img.jpeg",
+      
     },
     {
       id: 2,
@@ -22,8 +21,8 @@ export default function SlidingBanner() {
     {
       id: 3,
       image: "/images/hand holding card.png",
-      title: "Modern Digital Identity",
-      subtitle: "Stand out with customizable designs",
+      title: "",
+      subtitle: "",
     },
     {
       id: 4,
@@ -68,7 +67,7 @@ export default function SlidingBanner() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-orange-50 to-teal-50 py-8 sm:py-12">
       <div className="container mx-auto px-4">
-        <div className="relative h-58 sm:h-94 md:h-80 lg:h-150 rounded-2xl overflow-hidden shadow-xl">
+        <div className="relative h-58 sm:h-94 md:h-80 lg:h-[450px] rounded-2xl overflow-hidden shadow-xl">
           {/* Banner Container */}
           <div
             className="flex transition-transform duration-700 ease-in-out h-full"

@@ -206,7 +206,7 @@ export default function ContactForm() {
 
               <Card className="p-4 sm:p-6 bg-primary/5 border-primary/20">
                 <CardHeader className="p-0 mb-4">
-                  <CardTitle className="text-base sm:text-lg text-foreground">Why Choose Smart Africa?</CardTitle>
+                  <CardTitle className="text-base sm:text-lg text-foreground">Why Choose Vertex Cards?</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
                   <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">

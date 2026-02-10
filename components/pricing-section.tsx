@@ -49,7 +49,6 @@ export default function PricingSection() {
         "Whatsapp direct chat button",
         "Admin access to edit profile",
         "Cusatom design and colours for card",
-      
       ],
       popular: true,
       buttonText: "Most Popular",
@@ -68,10 +67,9 @@ export default function PricingSection() {
         "Custom domain name(e.g. yourname.com)",
         "Analytics dashboard to track card interactions",
         "Priority support",
-       
       ],
       popular: false,
-      buttonText: "Contact Sales",
+      buttonText: "Request a Quote",
       buttonVariant: "secondary" as const,
     },
   ]
@@ -112,7 +110,7 @@ export default function PricingSection() {
       <section id="pricing" className="py-16 sm:py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <Badge className="mb-4 bg-secondary/10 text-secondary">Transparent Pricing</Badge>
+            <Badge className="mb-4 bg-emerald-100 text-emerald-700 border border-emerald-200">Our Plans</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
               Choose Your Perfect Plan
             </h2>
@@ -125,30 +123,32 @@ export default function PricingSection() {
             {plans.map((plan, index) => (
               <Card
                 key={plan.name}
-                className={`relative p-4 sm:p-6 ${
-                  plan.popular
-                    ? "border-2 border-primary shadow-lg lg:scale-105"
-                    : "border border-border hover:shadow-md"
+                className={`relative p-4 sm:p-6 border-2 ${
+                  plan.id === "enterprise"
+                    ? "border-yellow-500 shadow-xl bg-gradient-to-br from-white to-yellow-50"
+                    : plan.popular
+                    ? "border-emerald-500 shadow-xl lg:scale-105 bg-gradient-to-br from-white to-emerald-50"
+                    : "border-emerald-200 hover:shadow-md hover:border-emerald-300"
                 } transition-all duration-300`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-primary text-primary-foreground px-4 py-1">Most Popular</Badge>
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <Badge className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-4 py-1.5 font-semibold shadow-lg">★ Most Popular</Badge>
                   </div>
                 )}
 
                 <CardHeader className="text-center pb-6">
                   <div
-                    className={`w-12 h-12 mx-auto mb-4 rounded-lg flex items-center justify-center ${
-                      plan.popular ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
+                    className={`w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center shadow-md ${
+                      plan.id === "enterprise" ? "bg-yellow-500 text-white" : "bg-emerald-500 text-white"
                     }`}
                   >
                     {plan.icon}
                   </div>
-                  <CardTitle className="text-xl font-bold text-foreground">{plan.name}</CardTitle>
+                  <CardTitle className={`text-xl font-bold ${plan.id === "enterprise" ? "text-yellow-700" : "text-emerald-700"}`}>{plan.name}</CardTitle>
                   <div className="mt-4">
-                    <span className="text-2xl sm:text-3xl font-bold text-foreground">{plan.price}</span>
-                    <span className="text-muted-foreground ml-1 text-sm">{plan.period}</span>
+                    <span className={`text-2xl sm:text-3xl font-bold ${plan.id === "enterprise" ? "text-yellow-600" : "text-emerald-600"}`}>{plan.price}</span>
+                    <span className={`${plan.id === "enterprise" ? "text-yellow-500" : "text-emerald-500"} ml-1 text-sm`}>{plan.period}</span>
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 text-pretty">{plan.description}</p>
                 </CardHeader>
@@ -157,12 +157,10 @@ export default function PricingSection() {
                   <ul className="space-y-3">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start space-x-3">
-                        <div
-                          className={`w-5 h-5 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 ${
-                            plan.popular ? "bg-primary/10" : "bg-muted"
-                          }`}
-                        >
-                          <Check className={`h-3 w-3 ${plan.popular ? "text-primary" : "text-muted-foreground"}`} />
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 ${
+                          plan.id === "enterprise" ? "bg-yellow-100" : "bg-emerald-100"
+                        }`}>
+                          <Check className={`h-3 w-3 ${plan.id === "enterprise" ? "text-yellow-600" : "text-emerald-600"}`} />
                         </div>
                         <span className="text-sm text-foreground leading-relaxed">{feature}</span>
                       </li>
@@ -171,7 +169,11 @@ export default function PricingSection() {
 
                   <Button
                     variant={plan.buttonVariant}
-                    className={`w-full ${plan.popular ? "bg-primary hover:bg-primary/90 text-primary-foreground" : ""}`}
+                    className={`w-full ${
+                      plan.id === "enterprise"
+                        ? "bg-yellow-500 hover:bg-yellow-600 text-white"
+                        : "bg-emerald-500 hover:bg-emerald-600 text-white"
+                    }`}
                     onClick={() => handlePlanSelect(plan)}
                     disabled={isLoading}
                   >
@@ -196,15 +198,15 @@ export default function PricingSection() {
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 text-sm text-muted-foreground">
               <span className="flex items-center justify-center space-x-1">
-                <Check className="h-4 w-4 text-primary flex-shrink-0" />
-                <span>5-day money-back guarantee</span>
+                <Check className="h-4 w-4 text-emerald-500 flex-shrink-0" />
+                <span>30-day money-back guarantee</span>
               </span>
               <span className="flex items-center justify-center space-x-1">
-                <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                <Check className="h-4 w-4 text-emerald-500 flex-shrink-0" />
                 <span>Free design consultation</span>
               </span>
               <span className="flex items-center justify-center space-x-1">
-                <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                <Check className="h-4 w-4 text-emerald-500 flex-shrink-0" />
                 <span>Bulk discounts available</span>
               </span>
             </div>
