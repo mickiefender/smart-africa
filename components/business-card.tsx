@@ -342,7 +342,7 @@ NOTE:${profile.bio}\n`
           {/* Smart Africa Branding */}
           <div className="pt-4 border-t border-gray-100 text-center">
             <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
-              <img src="/images/Vertex-logo.png" alt="SA" className="w-24 h-18 rounded-full object-contain" />
+             <a href="https://vertexcards.tech/" target="_blank" rel="noopener noreferrer"> <img src="/images/Vertex-logo.png" alt="SA" className="w-24 h-18 rounded-full object-contain" /></a>
               <span>Powered by Vertex Blueprint Technologies</span>
             </div>
           </div>
