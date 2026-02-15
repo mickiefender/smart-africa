@@ -56,6 +56,10 @@ export default function HomePage() {
         </div>
       </header>
 
+
+
+
+
       {/* Hero Section with Video Background */}
       <section className="relative w-full h-[50vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
         {/* Video Background */}
@@ -65,8 +69,8 @@ export default function HomePage() {
           loop
           playsInline
           preload="auto"
-          disablePictureInPicture
-          poster="/images/back.png"
+         
+         
           className="absolute inset-0 w-full h-full object-cover"
         >
           {/* Optional: Add a mobile-optimized video source here with media="(max-width: 768px)" */}
