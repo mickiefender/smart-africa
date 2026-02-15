@@ -5,6 +5,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import TikTokIcon from "./icons/tiktok-icon"
 
+
+
 import {
   Phone,
   Mail,
@@ -67,6 +69,7 @@ const socialIcons = {
   whatsapp: MessageCircle,
   tiktok: TikTokIcon,
   gmail: Mail,
+  website: Globe,
 }
 
 const socialColors = {
@@ -79,6 +82,7 @@ const socialColors = {
   whatsapp: "bg-green-500 hover:bg-green-600",
   tiktok: "bg-black hover:bg-gray-800",
   gmail: "bg-red-500 hover:bg-red-600",
+  website: "bg-gradient-to-r from-gray-800 to-black",
 }
 
 const getWhatsAppUrl = (url: string): string => {
@@ -252,6 +256,7 @@ NOTE:${profile.bio}\n`
             )}
           </div>
 
+
           {/* Social Media Links */}
           {socialLinks && socialLinks.length > 0 && (
             <div className="mb-6">
@@ -291,31 +296,26 @@ NOTE:${profile.bio}\n`
             </div>
           )}
 
-          {/* Website Links */}
           {websiteLinks && websiteLinks.length > 0 && (
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-900 mb-3">Links</h3>
-              <div className="space-y-2">
-                {websiteLinks.map((link) => (
-                  <a
-                    key={link.id}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors border border-gray-100 hover:border-gray-200"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex-1">
-                        <div className="font-medium text-gray-900 text-sm">{link.title}</div>
-                        {link.description && <div className="text-xs text-gray-600 mt-1">{link.description}</div>}
-                      </div>
-                      <ExternalLink className="h-4 w-4 text-gray-400" />
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
+  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+    {websiteLinks.map((link) => (
+      <a
+        key={link.id}
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex flex-col items-center gap-2 p-3 rounded-xl text-white transition-all duration-200 transform hover:scale-105 shadow-lg bg-gradient-to-r from-gray-800 to-black"
+        title={link.title}
+      >
+        <Globe className="h-6 w-6" />
+        <span className="text-xs font-semibold text-center leading-tight">
+          Website
+        </span>
+      </a>
+    ))}
+  </div>
+)}
+
 
           {/* Action Buttons */}
           <div className="flex gap-3 mb-6">
