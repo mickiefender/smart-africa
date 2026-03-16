@@ -17,8 +17,8 @@ export default function PricingSection() {
     {
       id: "starter",
       name: "BASIC",
-      price: "¢500",
-      priceValue: 500,
+      price: "¢200",
+      priceValue: 200,
       period: "per card",
       description: "Best for students and freelancers",
       icon: <Zap className="h-6 w-6" />,
@@ -38,8 +38,8 @@ export default function PricingSection() {
     {
       id: "professional",
       name: "PRO",
-      price: "¢1,000",
-      priceValue: 1000,
+      price: "¢500",
+      priceValue: 500,
       period: "per card",
       description: "Best for professionals and enterpreneurs",
       icon: <Star className="h-6 w-6" />,
