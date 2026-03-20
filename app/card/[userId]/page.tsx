@@ -10,17 +10,6 @@ interface PageProps {
   params: { userId: string }
 }
 
-export async function generateStaticParams() {
-  const supabase = createClient()
-  const { data: profiles } = await supabase
-    .from("profiles")
-    .select("user_id")
-
-  return profiles?.map(({ user_id }) => ({
-    userId: user_id.toLowerCase()
-  })) || []
-}
-
 export default async function CardPage({ params }: PageProps) {
   const { userId } = params
   const supabase = createClient()
