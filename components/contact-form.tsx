@@ -180,7 +180,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <p className="font-medium text-foreground text-sm sm:text-base">Phone</p>
-                      <p className="text-muted-foreground text-sm sm:text-base"><a href="tel:+233208517482">+233 208 517 482</a><br /><a href="tel:+233206243442">+233 206 243 442</a><br /></p>
+                      <p className="text-muted-foreground text-sm sm:text-base"><a href="tel:+233208517482">+233 208 517 482</a><br /><a href="tel:+233206243442">+233 206 243 442</a></p>
                     </div>
                   </div>
                   <div className="flex items-center space-x-3">
