@@ -9,6 +9,7 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { FloatingWhatsApp } from "@/components/floating-whatsapp"
 import SlidingBanner from "@/components/sliding-banner"
 import SlidingLogos from "@/components/sliding-logos"
+import { VideoSection } from "@/components/video-section"
 
 export default function HomePage() {
   return (
@@ -237,6 +238,7 @@ export default function HomePage() {
 
       {/* Pricing Section */}
       <PricingSection />
+      <VideoSection videoId="GpVZBcS3Co8" />
 
       {/* Testimonials Section */}
       <section id="testimonials">
